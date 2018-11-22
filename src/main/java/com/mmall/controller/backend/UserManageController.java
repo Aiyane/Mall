@@ -26,7 +26,7 @@ public class UserManageController {
         if (response.isSuccess()){
             User user = response.getData();
             if (user.getRole() == Const.Role.ROLE_ADMIN){
-                // 登录的是管理员
+                 // 登录的是管理员
                  session.setAttribute(Const.CURRENT_USER, user);
                  return response;
             }else{
