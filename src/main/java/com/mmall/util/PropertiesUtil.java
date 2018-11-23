@@ -27,6 +27,10 @@ public class PropertiesUtil {
         }
     }
 
+    /*
+    * static{} 优先于 {} 优先于 构造函数代码块{}。 静态代码块只在类被加载的时候执行，而且只被执行一次！
+    * */
+
     public static String getProperty(String key){
         String value = props.getProperty(key.trim());
         if(StringUtils.isBlank(value)){

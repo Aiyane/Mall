@@ -50,4 +50,19 @@ public class ProductManageController {
         }
         return ServerResponse.createByErrorMessage("该用户没有权限！");
     }
+
+    @RequestMapping(value = "detail.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse getDetail(HttpSession session, Integer productId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录管理员！");
+        }
+        if (iUserService.checkAdminRole(user).isSuccess()){
+            // 填充业务
+            return iProductService.manageProductDetail(productId);
+        }
+        return ServerResponse.createByErrorMessage("该用户没有权限！");
+    }
+
 }
